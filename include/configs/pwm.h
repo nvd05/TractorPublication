@@ -1,0 +1,5 @@
+#pragma once
+
+#define MAXIMUM_PWM_SIGNAL 2000
+#define MINIMUM_PWM_SIGNAL 1000
+#define IGNORE_PWM_SIGNAL  0
