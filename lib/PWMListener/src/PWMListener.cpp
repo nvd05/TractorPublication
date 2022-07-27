@@ -1,8 +1,14 @@
-// standard libraries
+#include "PWMListener.h"
 #include <Arduino.h>
 
-// my libraries
-#include "PWMListener.h"
+void PWMListener::setup(int pin, int ignore, Reference callback)
+{
+	_callback = callback;
+	_ignore   = ignore;
+	_pin      = pin;
+
+	pinMode(pin, OUTPUT);
+};
 
 void PWMListener::listen()
 {
@@ -13,7 +19,7 @@ void PWMListener::listen()
 		return;
 	}
 
-	long elapsed_time = _timer.get_elapsed_time();
+	long elapsed_time = _timer.get_elapsed_time(true);
 	_signal = signal;
 
 	if (signal == _ignore)
@@ -22,13 +28,4 @@ void PWMListener::listen()
 	}
 
 	_callback(elapsed_time);
-};
-
-void PWMListener::setup(int pin, int ignore, void (&callback)(long))
-{
-	_callback = callback;
-	_ignore   = ignore;
-	_pin      = pin;
-
-	pinMode(pin, INPUT);
 };

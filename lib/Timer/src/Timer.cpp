@@ -1,28 +1,24 @@
-// standard libraries
 #include <Arduino.h>
-
-// my libraries
 #include "Timer.h"
 
-long Timer::get_last_run_time()
+void Timer::set_microseconds(long microseconds = micros())
 {
-	return _lastRunTime;
+	_microseconds = microseconds;
 };
 
-long Timer::get_elapsed_time()
+long Timer::get_elapsed_time(bool update_time)
 {
 	long current_time = micros();
-	long elapsed_time = current_time - _lastRunTime;
+	long elapsed_time = current_time - _microseconds;
 
-	_lastRunTime = current_time;
+	if (update_time)
+	{
+		set_microseconds(current_time);
+	}
+
 	return elapsed_time;
 };
 
-void Timer::update_time()
-{
-	_lastRunTime = micros();
-};
-
-Timer::Timer() : _lastRunTime(micros())
+Timer::Timer() : _microseconds(micros())
 {
 };

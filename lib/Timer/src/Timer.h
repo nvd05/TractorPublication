@@ -1,17 +1,15 @@
 #pragma once
 
 /**
- * @brief Таймер
+ * @brief Микросекундный таймер
  */
-class Timer final
+class Timer
 {
 private:
-	long _lastRunTime;
+	long _microseconds;
 
 public:
-	long get_last_run_time();
-	long get_elapsed_time();
-	void update_time();
-
+	void set_microseconds(long microseconds);
+	long get_elapsed_time(bool update_time);
 	Timer();
 };
